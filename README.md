@@ -1,9 +1,9 @@
-Nama    : Kevin Ivan Eda Radhiyya
+Nama    : Taniella
 
-NPM     : 2201233210
+NPM     : 2206082316
 
-Kelas   : PBP B
+Kelas   : PBP D
 
 Hobi    : Tidur
 
-Jurusan : Ilmu Sistem Informasi Komputer
+Jurusan : Sistem Informasi 
