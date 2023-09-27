@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+<div class="container">
+    <nav class="navbar" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Shopping List Page</span>
+        <a class="navbar-brand" href="{% url 'main:logout' %}">
+            <img src="https://img.icons8.com/ios/50/exit--v1.png" height="24" alt="Logo" class="d-inline-block align-text-top">
+        </a>
+        </div>
+    </nav>
+    
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
+    <div class="user-info">
+        <h5>{{name}} - {{class}}</h5>
+        <h5>Amount of item in inventory: {{item_amount}}</h5>
+    </div>
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
-
-    <table>
+    <table class="item-table">
         <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
             <th>Date Added</th>
+            <th>Edit</th>
         </tr>
     
         {% comment %} Below is how to show the product data {% endcomment %}
@@ -25,23 +34,35 @@
                 <td>{{product.price}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.date_added}}</td>
+                <td>
+                    <a href="{% url 'main:edit_product' product.pk %}" class="btn">
+                        <button>
+                        Edit
+                        </button>
+                        
+                    </a>
+                    <a href="{% url 'main:delete_product' product.pk %}" class="btn">
+                        <button>
+                            Delete
+                        </button>
+
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
 
-    <br />
+    <div class="user-actions">
     <h5>Sesi terakhir login: {{ last_login }}</h5>
     <a href="{% url 'main:create_product' %}">
-        <button>
-            Add New Product
-        </button>
+        <button>Add New Product</button>
     </a>
 
     <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
+        <button>Logout</button>
     </a>
+    </div>
+</div>
 
 
 {% endblock content %}
