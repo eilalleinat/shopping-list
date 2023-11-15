@@ -1,8 +1,9 @@
+import json
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from main.forms import ProductForm
 from main.models import Product
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
@@ -25,6 +26,25 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Product.objects.create(
+            user = request.user,
+            name = data["name"],
+            price = int(data["price"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 def create_product(request):
     form = ProductForm(request.POST or None)
